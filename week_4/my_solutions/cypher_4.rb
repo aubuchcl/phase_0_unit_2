@@ -9,59 +9,33 @@
 
 
 
-def north_korean_cipher(coded_message)
-  input = coded_message.downcase.split("") # Check out this method in IRB to see how it works! Also refer to the ruby docs.
-  # this assigns the value passed to coded_message to input and the value is modified to individual chars "x"
-  decoded_sentence = [] #sets a new array
-  cipher = {"e" => "a", # This is technically a shift of four letters...Can you think of a way to automate this? Is a hash
-            "f" => "b", # the best data structure for this problem? What are the pros and cons of hashes?
-            "g" => "c",  #  
-            "h" => "d",
-            "i" => "e",
-            "j" => "f",
-            "k" => "g",
-            "l" => "h",
-            "m" => "i",
-            "n" => "j",
-            "o" => "k",
-            "p" => "l",
-            "q" => "m",
-            "r" => "n",
-            "s" => "o",
-            "t" => "p",
-            "u" => "q",
-            "v" => "r",
-            "w" => "s",
-            "x" => "t",
-            "y" => "u",
-            "z" => "v",
-            "a" => "w",
-            "b" => "x",
-            "c" => "y",
-            "d" => "z",
-            "@" => " ",
-            "#" => " ",
-            "$" => " ",
-            "%" => " ",
-            "^" => " ",
-            "&" => " ",
-            "*" => " "}
+def north_korean_cipher(coded_sentence)
+  input = coded_sentence.downcase.split("")
+  decoded_sentence = [] #blank array
+  alphabet = ('a'..'z').to_a
+  alphabet_cipher = Hash[alphabet.zip(alphabet.rotate(-4))]
+  alt_cipher = {"@" => " ", "#" => " ", "$" => " ", "%" => " ", "^" => " ", "&" => " ", "*" => " "}
+  cipher = alphabet_cipher.merge(alt_cipher)
             
-  input.each do |x| # What is #each doing here?
-    found_match = false # Why would this be assigned to false from the outset? What happens when it's true?
-    cipher.each_key do |y| # What is #each_key doing here?
-      if x == y # What is this comparing? Where is it getting x? Where is it getting y? What are those variables really?
+  input.each do |x|
+    found_match = false
+    
+    cipher.each_key do |y|
+      if x == y
         decoded_sentence << cipher[y]
         found_match = true
       end
     end
-      if !found_match # What is this looking for?
-        decoded_sentence << x
+
+    if !found_match
+      decoded_sentence << x
     end
   end
-  decoded_sentence = decoded_sentence.join("")
+
+  decoded_sentence = decoded_sentence.join("").capitalize
   decoded_sentence.gsub!(/\d+/) { |num| num.to_i / 100 }
-  decoded_sentence.capitalize # What is this returning?
+  decoded_sentence
+
 end
 
 
