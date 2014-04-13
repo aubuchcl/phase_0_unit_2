@@ -55,10 +55,17 @@ STATE_DATA = {  "Alabama" => {population_density: 94.65, population: 4822023, re
                 "Wyoming" => {population_density: 5.851, population: 576412, region: 8, regional_spread: 6}
               }
               
+# alabama = VirusPredictor.new("Alabama", STATE_DATA["Alabama"][:population_density], STATE_DATA["Alabama"][:population], STATE_DATA["Alabama"][:region], STATE_DATA["Alabama"][:regional_spread]) 
+# alabama.virus_effects              
               
               
-              
-              
+# x = 0
+# while x < STATE_DATA.count
+#     report = VirusPredictor.new(STATE_DATA.keys[x], STATE_DATA.values[x].values[x], STATE_DATA.values[x].values[1], STATE_DATA.values[x].values[2], STATE_DATA.values[x].values[3]) 
+#     puts report
+#     x +=1
+# end
+
               
 
 
