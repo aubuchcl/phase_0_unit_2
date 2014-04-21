@@ -21,8 +21,29 @@
 # 3. Initial Solution
 
 class PezDispenser
- 
-# your code here!
+	def initialize(flavors, full = true)
+		@pez = []
+		flavors.each {|pez| @pez << pez}
+		@full
+	end
+
+	def pez_count
+		@pez.length
+	end
+
+	def get_pez
+		puts "You eat a #{@pez[0]} pez"
+		@pez.pop
+	end
+
+	def add_pez(new_pez)
+		@pez << new_pez
+	end
+
+	def see_all_pez
+		@pez
+	end
+
  
 end
  

@@ -65,50 +65,83 @@
 
 # 4. Refactored Solution
 
+# class CreditCard
+# 	def initialize(number)
+# 		@number = number
+# 		if @number.to_s.bytesize != 16
+# 			raise ArgumentError.new("Please enter a vaild length card number")
+# 		end
+# 	end
+
+# 	def check_card
+# 		sum = 0
+# 		y = 0
+# 		holder = []
+# 		que = []
+# 		@number.to_s.each_char{|x| holder << x}
+# 		holder.map!{|x| x.to_i}.reverse!
+# 		while y < holder.length
+# 			holder[y + 1] = holder[y + 1] * 2
+# 			y += 2
+# 		end
+# 		holder.reverse!.join.to_i.to_s.each_char{|x| que << x}
+# 		que.map!{|x| x.to_i}.each{|x| sum += x}
+# 		if sum % 10 == 0
+# 			return true
+# 		else
+# 			return false
+# 		end
+# 	end
+
+
 class CreditCard
-	def initialize(number)
-		@number = number
-		if @number.to_s.bytesize != 16
-			raise ArgumentError.new("Please enter a vaild length card number")
-		end
-	end
+    def initialize(number)
+        @arr_num = number.to_s.split(//)
+        # @sum = sum
+        @doubled = double
+        @number = number
+        raise ArgumentError.new("That is not a vaild number") if @number.to_s.length != 16
+    end
 
-	def check_card
-		sum = 0
-		y = 0
-		holder = []
-		que = []
-		@number.to_s.each_char{|x| holder << x}
-		holder.map!{|x| x.to_i}.reverse!
-		while y < holder.length
-			holder[y + 1] = holder[y + 1] * 2
-			y += 2
-		end
-		holder.reverse!.join.to_i.to_s.each_char{|x| que << x}
-		que.map!{|x| x.to_i}.each{|x| sum += x}
-		if sum % 10 == 0
-			return true
-		else
-			return false
-		end
-	end
-
-
-
+    def double
+      cal = []
+        @arr_num.each_with_index do |value, index|
+            if index.even?
+                value_doubled = value.to_i * 2
+                value_doubled.to_s.split(//).each { |val| cal << val.to_i }
+            else
+                cal << value.to_i
+            end
+        end
+        @doubled = cal.inject(:+)
+    end
+                
+    # def sum
+    #     result = @doubled.inject(:+)
+    # end
+    
+    def check_card
+       
+       return true if @doubled % 10 == 0
+       false
+    end
 end
+
+
+# end
 
 
 
 
 # 1. DRIVER TESTS GO BELOW THIS LINE
-new_card = CreditCard.new(4408041234567892)
-puts new_card.check_card 
+# new_card = CreditCard.new(4408041234567892)
+# puts new_card.check_card 
 
-good_card = CreditCard.new(4408041234567893)
-puts good_card.check_card
+# good_card = CreditCard.new(4408041234567893)
+# puts good_card.check_card
 
-bad_num = CreditCard.new(234234)
-puts bad_num 
+# bad_num = CreditCard.new(234234)
+# puts bad_num 
 
 
 
